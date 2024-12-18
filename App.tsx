@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { Pedometer } from "expo-sensors";
+import * as Sensors from "expo-sensors";
 
 export default function App() {
   const [isPedometerAvailable, setIsPedometerAvailable] = useState("checking");
@@ -14,11 +15,10 @@ export default function App() {
   }, []);
   return (
     <SafeAreaProvider>
-      <SafeAreaView>
-        <View style={styles.container}>
-          <Text>Open up App.tsx to start working on your app!</Text>
-          <StatusBar style="auto" />
-        </View>
+      <SafeAreaView style={styles.container}>
+        <Text>Pedometer.isAvailableAsync(): {isPedometerAvailable}</Text>
+        <Text>Steps taken in the last 24 hours: {pastStepCount}</Text>
+        <Text>Walk! And watch this go up: {currentStepCount}</Text>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -27,8 +27,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#ffcccc55",
     alignItems: "center",
     justifyContent: "center",
+    gap: 12,
   },
 });
